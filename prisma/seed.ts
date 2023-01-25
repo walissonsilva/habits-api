@@ -41,14 +41,58 @@ async function main() {
         },
       },
     }),
+    prisma.habit.create({
+      data: {
+        id: thirdHabitId,
+        title: "Dormir 8h",
+        created_at: thirdHabitCreationDate,
+        weekDays: {
+          create: [
+            { week_day: 0 },
+            { week_day: 1 },
+            { week_day: 2 },
+            { week_day: 3 },
+            { week_day: 4 },
+            { week_day: 5 },
+            { week_day: 6 },
+          ],
+        },
+      },
+    }),
   ]);
 
-  await prisma.habit.create({
-    data: {
-      title: "Beber 3L de água",
-      created_at: new Date("2023-01-24T23:51:00.000z"),
-    },
-  });
+  await Promise.all([
+    prisma.day.create({
+      data: {
+        date: new Date("2023-01-02T03:00:00.000"),
+        dayHabits: {
+          create: {
+            habit_id: firstHabitId,
+          },
+        },
+      },
+    }),
+
+    prisma.day.create({
+      data: {
+        date: new Date("2023-01-06T03:00:00.000"),
+        dayHabits: {
+          create: {
+            habit_id: firstHabitId,
+          },
+        },
+      },
+    }),
+
+    prisma.day.create({
+      data: {
+        date: new Date("2023-01-04T03:00:00.000"),
+        dayHabits: {
+          create: [{ habit_id: firstHabitId }, { habit_id: secondHabitId }],
+        },
+      },
+    }),
+  ]);
 }
 main()
   .then(async () => {
