@@ -1,0 +1,24 @@
+erDiagram
+
+  habits {
+
+    }
+  
+
+  habit_week_days {
+
+    }
+  
+
+  days {
+
+    }
+  
+
+  day_habits {
+
+    }
+  
+    habit_week_days o{--|| habits : "habit"
+    day_habits o{--|| days : "day"
+    day_habits o{--|| habits : "habit"
