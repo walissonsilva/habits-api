@@ -75,10 +75,10 @@ async function main() {
 
     prisma.day.create({
       data: {
-        date: new Date("2023-01-06T03:00:00.000"),
+        date: new Date("2023-01-03T03:00:00.000"),
         dayHabits: {
           create: {
-            habit_id: firstHabitId,
+            habit_id: secondHabitId,
           },
         },
       },
